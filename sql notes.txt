@@ -1,0 +1,707 @@
+commmand-show databases-it will lists down the database list.
+create database cdb;-this command it will craete the database with the name cdb
+drop database cdb;-it will remove the database
+system cls;-to clear the screen
+use cdb;-it will select the database with the name "cdb"
+create table tasks (
+id int primary key,
+title varchar(255) unique not null,
+start_date Date,
+due_date Date
+);
+show tables; - it will show the list of tables selected database
+
+create table checklist(
+id int,
+task_id int,
+title varchar (255) not null,
+is_completed boolean not null Default False,
+primary key(id,task_id),
+foreign key(task_id)
+references tasks(id)
+on update restrict
+on delete cascade
+);
+alter table tasks
+AUTO_INCREMENT =1;
+desc tasks;-it show the structure of the tasks table.
+
+create table tasks (
+id int auto_increment primary key,
+title varchar(255) unique not null,
+start_date Date,
+due_date Date
+);
+
+alter table tasksmodify id int AUTO_INCREMENT;
+
+create table subscribers(
+email varchar (300) not null unique);
+
+alter table subscribers
+add id int auto_increment primary key;
+
+alter table subscribers
+add phone int ;
+
+
+
+alter table subscribers
+rename column id to s_id;
+
+rename table subscribers to sub
+
+drop table sub;
+
+assignments:
+Write a SQL statement to create a simple table movies which should
+ include columns movie_id, movie_name, movie_type and movie_rating only if 
+ it does not exist. The combination of movie_id and movie_name should be an unique indentifier of the table.
+ 
+  create table movies(
+    -> movie_id int,
+    -> movie_name varchar (255) not null,
+    ->  movie_type varchar (255) not null,
+    -> movie_rating int,
+    -> primary key(movie_id,movie_name)
+    -> );
+	
+Alter
+Write a SQL statement to rename the movies table to movies_renamed.
+
+rename table movies to movies_renamed;
+
+Write a SQL statement to add a column movie_director to the movies_renamed table.
+
+ alter table movies_renamed
+    -> add movie_director varchar(255) not null;
+	
+	Write a SQL statement to add a column ID as a first column of the movies_renamed table.
+	
+	 alter table movies_renamed
+    -> add ID int first;
+	
+	
+	
+	
+	create table tasks1 (
+	task_id int auto_increment primary key,
+	title varchar(255) not null,
+	start_date Date,
+	due_date Date,
+	priority tinyint not null default 3,insert into tasks1 (title,priority)
+    ->     -> values('do prestudy',1),
+    ->     -> ('do requirement gathering',1),
+    ->     -> ('do see',2);
+	description text
+	);
+	==================================================================================================================================================
+	25/06/2024
+	 display only fname and lname
+	 =select firstname,lastname from employees;
+	 
+	 *display fullname for the employees
+	 =select concat(firstname,""+lastname) from employees
+	 give heading for this:
+	 =select concat(firstname,"",lastname) as Fullname from employees;
+	 *display current date and time
+	 =
+	 *display current logged in user
+	 =select current_user();
+	 
+	  select ordernumber,quantityordered,priceeach
+	  ,priceeach*quantityordered "totalprice"
+	  from orderdetails
+	  order by priceeach*quantityordered
+	  limit 10;
+	 
+	 select ordernumber,quantityordered,priceeach
+	  ,priceeach*quantityordered "totalprice"
+	  from orderdetails
+	  order by priceeach*quantityordered desc
+	  limit 10;
+	  
+	  select ordernumber,status from orders
+	  order by field(status,
+	  'Shipped',
+	  'In Process',
+	  'On Hold',
+	  'Cancelled',
+	  'Resolved',
+	  'Disputed')
+	  limit 20
+	  
+	  in database filtering can be achieved in rdbms usibg where clause
+	  select * from orders where status ='In Process'
+	  
+	  select firstname,lastname,jobtitle from employees where jobtitle='Sales Rep' =this command display all the employees where job title=sales rep
+	  
+	  select distinct jobtitle from employees;=it shows differnet jobtitle
+	  
+	  select firstname,lastname,jobtitle from employees where jobtitle in ('President','VP Sales')=display all employees wheee tghe job title president and vp sales.
+
+select firstname,lastname,jobtitle,reportsto from employees where jobtitle in ('President','VP Sales','Sales Rep')
+select firstname,lastname,jobtitle,reportsto from employees where jobtitle in ('President','VP Sales','Sales Rep') and reportsto !=1143;
+select firstname,lastname,jobtitle,reportsto from employees where jobtitle in ('President','VP Sales','Sales Rep') and (reportsto !=1143 or reportsto is null);
+select firstname,lastname,jobtitle,reportsto from employees where jobtitle in ('President','VP Sales','Sales Rep') and reportsto is null;
+select firstname,lastname,jobtitle,reportsto from employees where jobtitle not  in ('President','VP Sales','Sales Rep') and reportsto is not null;
+// List out all tables:
+    *show databases;
+	
+//To Create Databases:
+	* create datbase database_name;
+	
+//To DROP Databases:
+    *DROP datbase database_name;
+	
+	//CLEAR THE SCREEN: SYSTEM CLS
+	//USE CDB:IT WILL SELECT THE DATABASE WITH THE NAME "CDB".
+	
+	//CREATE TABLE: CREATE TABLE TABLE_NAME(COLUMN_NAME DATATYPE CONSTRAINTS,COLUMN_NAME DATATYPE CONSTRAINTS)
+	ex: CREATE TABLE TASKS(ID INT PRIMARY KEY,TITLE VARCHAR(255) UNIQUE NOT NULL,START_DATE DATE,DUE_DATE DATE);
+	
+	
+//SHOW TABLES-IT WILL SHOW ALL TABLES IN  THE SELECTED DATABASE	
+
+
+ CREATE TABLE CHECKLIST(ID INT,
+   TASKS_ID INT AUTO_INCREMENT,
+    TITLE VARCHAR(255),
+    IS_COMPLETED BOOLEAN NOT NULL DEFAULT FALSE,
+      PRIMARY KEY(ID,TASKS_ID),
+   FOREIGN KEY(TASKS_ID)
+    REFERENCES TASKS(ID) 
+	ON UPDATE RESTRICT 
+	ON DELETE CASCADE);
+	
+	//CREATE TABLE SUBSCRIBERS(EMAIL VARCHAR(300) NOT NULL UNIQUE);
+	// ALTER TABLE SUBSCRIBERS
+    -> ADD PHONE INT;
+	
+	// RENAME TABLE SUBSCRIBERS TO SUB;
+	
+	// ALTER TABLE SUBSCRIBERS
+    -> RENAME COLUMN PHONE TO CONTACT;
+	
+	// ALTER TABLE SUB
+    -> RENAME COLUMN PHONE TO CONTACT;
+	
+	
+	//Task 1:TABLE 1
+	--------------------------------
+		CREATE TABLE MOVIES(
+		MOVIE_ID INT PRIMARY KEY,
+		MOVIE_NAME VARCHAR(255) UNIQUE NOT NULL,
+		MOVIE_TYPE VARCHAR(255)  NOT NULL,
+		MOVIE_RATING INT);
+		===========================================
+		TABLE 2:
+		
+		CREATE TABLE COMPANY(
+		COMPANY_ID INT PRIMARY KEY,
+		TRADE VARCHAR(255)  NOT NULL,
+		NUMBER_OF_EMPLOYESS INT   NOT NULL DEFAULT 0
+		);
+		===============================================
+		TABLE:3
+		
+		CREATE TABLE JOB_OFFER(
+		OFFER_ID INT AUTO_INCREMENT PRIMARY KEY ,
+		OFFER_TITLE  VARCHAR(255) NOT NULL  DEFAULT " " ,
+		OFFER_MIN_SALARY INT DEFAULT 5000,
+		OFFER_MAX_SALARY INT NULL,
+		COMPANY_ID INT,
+		FOREIGN KEY (COMPANY_ID)
+		REFERENCES COMPANY (COMPANY_ID)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE
+		);
+		//ALERT:
+		------------------------------------------
+		Write a SQL statement to rename the movies table to movies_renamed.
+		RENAME TABLE MOVIES TO MOVIES_RENAMED;
+
+Write a SQL statement to add a column movie_director to the movies_renamed table.
+ALTER TABLE MOVIES_RENAMED
+ADD COLUMN MOVIE_DIRECTOR VARCHAR(50);
+
+Write a SQL statement to add a column ID as a first column of the movies_renamed table.
+
+
+Write a SQL statement to add a column movie_description after the movie_name column in movies_renamed table.
+ALTER TABLE MOVIES_RENAMED
+ADD COLUMN MOVIE_DESCRIPTION VARCHAR(100) AFTER MOVIE_NAME;
+
+Write a SQL statement to change the data type of the column movie_rating to integer.
+ALTER TABLE MOVIES_RENAMED
+MODIFY COLUMN MOVIE_RATING INT;
+Write a SQL statement to drop the movie_director column.
+
+ALTER TABLE MOVIES_RENAMED
+DROP COLUMN MOVIE_DIRECTOR;
+
+Write a SQL statement to drop the existing primary key from the movies_renamed table.
+
+ALTER TABLE MOVIES_RENAMED
+DROP COLUMN MOVIE_ID;
+
+Write a SQL statement to add primary key for the column movie_id in the movies_renamed table.
+ALTER TABLE MOVIES_RENAMED
+ADD COLUMN MOVIE_ID INT PRIMARY KEY ;
+
+Write a SQL statement to add a foreign key constraint named fk_candidate_id on company_id column referencing to the primar
+y key company_id from the company table.
+
+//LESSON:DROP TABLE 
+
+//CREATE TABLE TASKS(
+TASK_ID INT AUTO_INCREMENT PRIMARY KEY,
+TITLE VARCHAR(255) NOT NULL,
+START_DATE DATE,
+DUE_DATE DATE,
+PRIORITY TINYINT NOT NULL DEFAULT 3,
+DESCRIPTION TEXT);
+
+//INSERT INTO TASKS(TITLE ,PRIORITY) VALUES ('LEARN MYSQL INSERT STATEMENT',1);
+//SELECT * FROM TASKS;
++---------+------------------------------+------------+----------+----------+-------------+
+| TASK_ID | TITLE                        | START_DATE | DUE_DATE | PRIORITY | DESCRIPTION |
++---------+------------------------------+------------+----------+----------+-------------+
+|       1 | LEARN MYSQL INSERT STATEMENT | NULL       | NULL     |        1 | NULL        |
++---------+------------------------------+------------+----------+----------+-------------+
+1 row in set (0.00 sec)
+
+//INSERT INTO TASKS VALUES(2,'INSERT STATEMENT WITHOUT COLOUM','2024-06-01','2024-06-02',2,'THE SEQUENCE SHOULD BE MAINTAIN
+ED WHENEVER WE ARE USING THE INERT /N WITHOUT SPECIFYING THE COLUM NAMES' );
+
+
++---------+---------------------------------+------------+------------+----------+---------------------------------------------------------------------------------------------------------+
+| TASK_ID | TITLE                           | START_DATE | DUE_DATE   | PRIORITY | DESCRIPTION                                                                                             |
++---------+---------------------------------+------------+------------+----------+---------------------------------------------------------------------------------------------------------+
+|       1 | LEARN MYSQL INSERT STATEMENT    | NULL       | NULL       |        1 | NULL                                                                                                    |
+|       2 | INSERT STATEMENT WITHOUT COLOUM | 2024-06-01 | 2024-06-02 |        2 | THE SEQUENCE SHOULD BE MAINTAINED WHENEVER WE ARE USING THE INSERT \N WITHOUT SPECIFYING THE COLUM NAMES |
++---------+---------------------------------+------------+------------+----------+--------------------------------------------------------------------------------------
+// PRESENT DATE:
+ INSERT INTO TASKS
+    -> (TITLE,START_DATE,DUE_DATE)
+    -> VALUES("PRESENT DATE",CURRENT_DATE(),CURRENT_DATE()+1);
+	
+	+---------+---------------------------------+------------+------------+----------+---------------------------------------------------------------------------------------------------------+
+| TASK_ID | TITLE                           | START_DATE | DUE_DATE   | PRIORITY | DESCRIPTION                                                                                             |
++---------+---------------------------------+------------+------------+----------+---------------------------------------------------------------------------------------------------------+
+|       1 | LEARN MYSQL INSERT STATEMENT    | NULL       | NULL       |        1 | NULL                                                                                                    |
+|       2 | INSERT STATEMENT WITHOUT COLOUM | 2024-06-01 | 2024-06-02 |        2 | THE SEQUENCE SHOULD BE MAINTAINED WHENEVER WE ARE USING THE INERT /N WITHOUT SPECIFYING THE COLUM NAMES |
+|       3 | PRESENT DATE                    | 2024-06-24 | 2024-06-25 |        3 | NULL                                                                                                    |
++---------+---------------------------------+------------+------------+----------+---------------------------------------------------------------------------------------------------------+
+
+
+
+//INSERT MULTIPLE VA;LUES
+
+INSERT INTO TASKS (TITLE,PRIORITY) VALUES
+("HAI",1),
+("HAI",2),
+("HAI",4),
+("HAI",5);
+
+SELECT * FROM TASKS;
++---------+---------------------------------+------------+------------+----------+---------------------------------------------------------------------------------------------------------+
+| TASK_ID | TITLE                           | START_DATE | DUE_DATE   | PRIORITY | DESCRIPTION                                                                                             |
++---------+---------------------------------+------------+------------+----------+---------------------------------------------------------------------------------------------------------+
+|       1 | LEARN MYSQL INSERT STATEMENT    | NULL       | NULL       |        1 | NULL                                                                                                    |
+|       2 | INSERT STATEMENT WITHOUT COLOUM | 2024-06-01 | 2024-06-02 |        2 | THE SEQUENCE SHOULD BE MAINTAINED WHENEVER WE ARE USING THE INERT /N WITHOUT SPECIFYING THE COLUM NAMES |
+|       3 | PRESENT DATE                    | 2024-06-24 | 2024-06-25 |        3 | NULL                                                                                                    |
+|       4 | HAI                             | NULL       | NULL       |        1 | NULL                                                                                                    |
+|       5 | HAI                             | NULL       | NULL       |        2 | NULL                                                                                                    |
+|       6 | HAI                             | NULL       | NULL       |        4 | NULL                                                                                                    |
+|       7 | HAI                             | NULL       | NULL       |        5 | NULL                                                                                                    |
++---------+---------------------------------+------------+------------+----------+---------------------------------------------------------------------------------------------------------+
+
+
+======================================================================================================================================================================================
+25/06/2024
+
+source C:\Users\sivalingam.k\Downloads\mysqlsampledatabase.sql
+Query OK, 1 row affected (0.45 sec)
+
+Database changed
+Query OK, 0 rows affected, 1 warning (0.45 sec)
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+Query OK, 0 rows affected, 1 warning (0.08 sec)
+
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+Query OK, 0 rows affected (0.41 sec)
+
+Query OK, 0 rows affected, 1 warning (0.35 sec)
+
+Query OK, 0 rows affected (0.12 sec)
+
+Query OK, 0 rows affected (0.22 sec)
+
+Query OK, 0 rows affected (0.21 sec)
+
+Query OK, 0 rows affected (0.13 sec)
+
+Query OK, 0 rows affected (0.19 sec)
+
+Query OK, 0 rows affected, 1 warning (0.20 sec)
+
+Query OK, 7 rows affected (0.09 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+Query OK, 110 rows affected (0.14 sec)
+Records: 110  Duplicates: 0  Warnings: 0
+
+Query OK, 7 rows affected (0.05 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+Query OK, 23 rows affected (0.07 sec)
+Records: 23  Duplicates: 0  Warnings: 0
+
+Query OK, 122 rows affected (0.12 sec)
+Records: 122  Duplicates: 0  Warnings: 0
+
+Query OK, 326 rows affected (0.10 sec)
+Records: 326  Duplicates: 0  Warnings: 0
+
+Query OK, 273 rows affected (0.06 sec)
+Records: 273  Duplicates: 0  Warnings: 0
+
+Query OK, 2996 rows affected (0.53 sec)
+Records: 2996  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++-------------------------+
+| Tables_in_classicmodels |
++-------------------------+
+| customers               |
+| employees               |
+| offices                 |
+| orderdetails            |
+| orders                  |
+| payments                |
+| productlines            |
+| products                |
++-------------------------+
+8 rows in set (0.11 sec)
+
+
+//-DISPLAY ONLY FIRSTNAME  AND LASTNAME ,EMAIL OF THE EMPLOYEE;
+SELECT FIRSTNAME,LASTNAME,EMAIL
+FROM EMPLOYEES;
++-----------+-----------+---------------------------------+
+| FIRSTNAME | LASTNAME  | EMAIL                           |
++-----------+-----------+---------------------------------+
+| Diane     | Murphy    | dmurphy@classicmodelcars.com    |
+| Mary      | Patterson | mpatterso@classicmodelcars.com  |
+| Jeff      | Firrelli  | jfirrelli@classicmodelcars.com  |
+| William   | Patterson | wpatterson@classicmodelcars.com |
+| Gerard    | Bondur    | gbondur@classicmodelcars.com    |
+| Anthony   | Bow       | abow@classicmodelcars.com       |
+| Leslie    | Jennings  | ljennings@classicmodelcars.com  |
+| Leslie    | Thompson  | lthompson@classicmodelcars.com  |
+| Julie     | Firrelli  | jfirrelli@classicmodelcars.com  |
+| Steve     | Patterson | spatterson@classicmodelcars.com |
+| Foon Yue  | Tseng     | ftseng@classicmodelcars.com     |
+| George    | Vanauf    | gvanauf@classicmodelcars.com    |
+| Loui      | Bondur    | lbondur@classicmodelcars.com    |
+| Gerard    | Hernandez | ghernande@classicmodelcars.com  |
+| Pamela    | Castillo  | pcastillo@classicmodelcars.com  |
+| Larry     | Bott      | lbott@classicmodelcars.com      |
+| Barry     | Jones     | bjones@classicmodelcars.com     |
+| Andy      | Fixter    | afixter@classicmodelcars.com    |
+| Peter     | Marsh     | pmarsh@classicmodelcars.com     |
+| Tom       | King      | tking@classicmodelcars.com      |
+| Mami      | Nishi     | mnishi@classicmodelcars.com     |
+| Yoshimi   | Kato      | ykato@classicmodelcars.com      |
+| Martin    | Gerard    | mgerard@classicmodelcars.com    |
++-----------+-----------+---------------------------------+
+
+
+
+//DISPLAY FULL OF THE EMPLOYEE (+ WILL NOT WORK INSTEAD USE CONCAT IN MYSQL ONLY)
+SELECT CONCAT(FIRSTNAME," ",LASTNAME) FROM EMPLOYEES;
++--------------------------------+
+| CONCAT(FIRSTNAME," ",LASTNAME) |
++--------------------------------+
+| Diane Murphy                   |
+| Mary Patterson                 |
+| Jeff Firrelli                  |
+| William Patterson              |
+| Gerard Bondur                  |
+| Anthony Bow                    |
+| Leslie Jennings                |
+| Leslie Thompson                |
+| Julie Firrelli                 |
+| Steve Patterson                |
+| Foon Yue Tseng                 |
+| George Vanauf                  |
+| Loui Bondur                    |
+| Gerard Hernandez               |
+| Pamela Castillo                |
+| Larry Bott                     |
+| Barry Jones                    |
+| Andy Fixter                    |
+| Peter Marsh                    |
+| Tom King                       |
+| Mami Nishi                     |
+| Yoshimi Kato                   |
+| Martin Gerard                  |
++--------------------------------+
+
+//DISPLAY FULL NAME WITH ALIAS;
+
+//DISPLAY CURRENT DATE AND TIME 
+
+SELECT NOW() "DATETIME";
++---------------------+
+| DATETIME            |
++---------------------+
+| 2024-06-25 11:32:33 |
++---------------------+
+
+//DISPLAY CURRENT DATE ONLY:
+SELECT  CURRENT_DATE() DATE;
++------------+
+| DATE       |
++------------+
+| 2024-06-25 |
++------------+
+/DISPLAY CURRENT TIME ONLY:
+SELECT  CURRENT_TIME() TIME;
+
++----------+
+| TIME     |
++----------+
+| 11:35:33 |
++----------+
+
+//DISPLAY CURRENT LOGGED IN USER
+SELECT CURRENT_USER() USERNAME;
+
++----------------+
+| USERNAME       |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.01 s
+
+
+//DISPLAY OFFICES IN THE ASSCENDING ORDER BY CITY
+SELECT OFFICECODE,CITY,PHONE FROM OFFICES ORDER BY CITY ASC;
+
++------------+---------------+------------------+
+| OFFICECODE | CITY          | PHONE            |
++------------+---------------+------------------+
+| 2          | Boston        | +1 215 837 0825  |
+| 7          | London        | +44 20 7877 2041 |
+| 3          | NYC           | +1 212 555 3000  |
+| 4          | Paris         | +33 14 723 4404  |
+| 1          | San Francisco | +1 650 219 4782  |
+| 6          | Sydney        | +61 2 9264 2451  |
+| 5          | Tokyo         | +81 33 224 5000  |
++------------+---------------+------------------+
+
+//DISPLAY OFFICES IN THE dESCENDING ORDER BY CITY
+
+SELECT OFFICECODE,CITY,PHONE FROM OFFICES ORDER BY CITY DESC;
++------------+---------------+------------------+
+| OFFICECODE | CITY          | PHONE            |
++------------+---------------+------------------+
+| 5          | Tokyo         | +81 33 224 5000  |
+| 6          | Sydney        | +61 2 9264 2451  |
+| 1          | San Francisco | +1 650 219 4782  |
+| 4          | Paris         | +33 14 723 4404  |
+| 3          | NYC           | +1 212 555 3000  |
+| 7          | London        | +44 20 7877 2041 |
+| 2          | Boston        | +1 215 837 0825  |
++------------+---------------+------------------+
+
+// DISPLAY COUNTRY IN ASSCENDING AND CITY AS DESCENDING
+
+SELECT CITY,COUNTRY,PHONE,OFFICECODE FROM OFFICES ORDER BY COUNTRY ASC,CITY DESC;
+
++---------------+-----------+------------------+------------+
+| CITY          | COUNTRY   | PHONE            | OFFICECODE |
++---------------+-----------+------------------+------------+
+| Sydney        | Australia | +61 2 9264 2451  | 6          |
+| Paris         | France    | +33 14 723 4404  | 4          |
+| Tokyo         | Japan     | +81 33 224 5000  | 5          |
+| London        | UK        | +44 20 7877 2041 | 7          |
+| San Francisco | USA       | +1 650 219 4782  | 1          |
+| NYC           | USA       | +1 212 555 3000  | 3          |
+| Boston        | USA       | +1 215 837 0825  | 2          |
++---------------+-----------+------------------+------------+
+
+
+// SELECT ORDERNUMBER,PRICEEACH,QUANTITYORDERED FROM ORDERDETAILS LIMIT 10;
++-------------+-----------+-----------------+
+| ORDERNUMBER | PRICEEACH | QUANTITYORDERED |
++-------------+-----------+-----------------+
+|       10100 |    136.00 |              30 |
+|       10100 |     55.09 |              50 |
+|       10100 |     75.46 |              22 |
+|       10100 |     35.29 |              49 |
+|       10101 |    108.06 |              25 |
+|       10101 |    167.06 |              26 |
+|       10101 |     32.53 |              45 |
+|       10101 |     44.35 |              46 |
+|       10102 |     95.55 |              39 |
+|       10102 |     43.13 |              41 |
++-------------+-----------+-----------------+
+
+
+// SELECT ORDERNUMBER,PRICEEACH,QUANTITYORDERED,PRICEEACH*QUANTITYORDERED AS TOTAL PRICE FROM ORDERDETAILS ;
+
+(SHOWING WHOLE TABLE WITH ONE MORE COLUM TOTAL PRICE)
+
+
+//SELECT ORDERNUMBER,PRICEEACH,QUANTITYORDERED,PRICEEACH*QUANTITYORDERED AS TOTALPRICE FROM ORDERDETAILS ORDER BY TOTALPRICE ASC LIMIT 10;;
++-------------+-----------+-----------------+------------+
+| ORDERNUMBER | PRICEEACH | QUANTITYORDERED | TOTALPRICE |
++-------------+-----------+-----------------+------------+
+|       10419 |     32.10 |              15 |     481.50 |
+|       10420 |     35.29 |              15 |     529.35 |
+|       10322 |     26.55 |              20 |     531.00 |
+|       10407 |     91.11 |               6 |     546.66 |
+|       10425 |     50.32 |              11 |     553.52 |
+|       10344 |     27.88 |              20 |     557.60 |
+|       10110 |     28.88 |              20 |     577.60 |
+|       10280 |     29.87 |              20 |     597.40 |
+|       10408 |     41.03 |              15 |     615.45 |
+|       10409 |    104.25 |               6 |     625.50 |
++-------------+-----------+-----------------+------------+
+
+//DISPLAY UNIQUE STATUS FROM THE ORDERS TABLE;
+
+SELECT DISTINCT STATUS FROM ORDERS;
++------------+
+| STATUS     |
++------------+
+| Shipped    |
+| Resolved   |
+| Cancelled  |
+| On Hold    |
+| Disputed   |
+| In Process |
++------------+
+
+//FIXING THE ORDER INSTEADOF USING ORDER BY;
+SELECT ORDERNUMBER,STATUS FROM ORDERS
+ORDER BY FIELD (
+STATUS,'IN PROCESS','CANCELLED','RESOLVED','DISPUTED','SHIPPED') LIMIT 20;
+
++-------------+------------+
+| ORDERNUMBER | STATUS     |
++-------------+------------+
+|       10401 | On Hold    |
+|       10407 | On Hold    |
+|       10414 | On Hold    |
+|       10334 | On Hold    |
+|       10422 | In Process |
+|       10420 | In Process |
+|       10424 | In Process |
+|       10425 | In Process |
+|       10423 | In Process |
+|       10421 | In Process |
+|       10253 | Cancelled  |
+|       10260 | Cancelled  |
+|       10248 | Cancelled  |
+|       10262 | Cancelled  |
+|       10179 | Cancelled  |
+|       10167 | Cancelled  |
+|       10327 | Resolved   |
+|       10386 | Resolved   |
+|       10367 | Resolved   |
+|       10164 | Resolved   |
++-------------+------------+
+
+
+
+//
+SELECT FIRSTNAME,REPORTSTO FROM EMPLOYEES ORDER BY REPORTSTO;
++-----------+-----------+
+| FIRSTNAME | REPORTSTO |
++-----------+-----------+
+| Diane     |      NULL |
+| Mary      |      1002 |
+| Jeff      |      1002 |
+| William   |      1056 |
+| Gerard    |      1056 |
+| Anthony   |      1056 |
+| Mami      |      1056 |
+| Andy      |      1088 |
+| Peter     |      1088 |
+| Tom       |      1088 |
+| Loui      |      1102 |
+| Gerard    |      1102 |
+| Pamela    |      1102 |
+| Larry     |      1102 |
+| Barry     |      1102 |
+| Martin    |      1102 |
+| Leslie    |      1143 |
+| Leslie    |      1143 |
+| Julie     |      1143 |
+| Steve     |      1143 |
+| Foon Yue  |      1143 |
+| George    |      1143 |
+| Yoshimi   |      1621 |
++-----------+-----------+
+
+//fILTERING: IN DATABASE,FILTERING CAN ACHIEVED IN RDBMS USING "WHERE" CLAUSE
+
+SELECT ORDERNUMBER,ORDERDATE,STATUS FROM ORDERS WHERE STATUS='IN PROCESS';                                                                           
+
++-------------+------------+------------+
+| ORDERNUMBER | ORDERDATE  | STATUS     |
++-------------+------------+------------+
+|       10420 | 2005-05-29 | In Process |
+|       10421 | 2005-05-29 | In Process |
+|       10422 | 2005-05-30 | In Process |
+|       10423 | 2005-05-30 | In Process |
+|       10424 | 2005-05-31 | In Process |
+|       10425 | 2005-05-31 | In Process |
++-------------+------------+------------+
+
+//SELECT ORDERNUMBER,ORDERDATE,STATUS FROM ORDERS WHERE STATUS='IN PROCESS' ORDER BY ORDERDATE;   
+
++-------------+------------+------------+
+| ORDERNUMBER | ORDERDATE  | STATUS     |
++-------------+------------+------------+
+|       10420 | 2005-05-29 | In Process |
+|       10421 | 2005-05-29 | In Process |
+|       10422 | 2005-05-30 | In Process |
+|       10423 | 2005-05-30 | In Process |
+|       10424 | 2005-05-31 | In Process |
+|       10425 | 2005-05-31 | In Process |
++-------------+------------+------------+
+-sorting,order by,asc,desc,where,comparison operator and logical operators and other operator-in,not in,is null,is not null
+
+select productname from products where productname like 'A%';
+
+ select firstName,lastName from employees where firstName like '%i'=it ends with i.
+ 
+ select ordernumber,orderdate from orders
+ where orderdate >='2003-01-01'
+ and 
+ orderdate <='2003-03-04'
+ select productcode,productname,buyprice
+ from products
+ where
+ buyprice  between 90 and 100
+
+
+
+
+
